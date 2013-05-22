@@ -27,3 +27,31 @@ web_app "site1" do
   doc_root "/vagrant/site1/htdocs"
   vhost_root "/vagrant/site1"
 end
+
+directory "/vagrant/site2" do
+  owner "root"
+  group "root"
+  mode 00644
+  action :create
+end
+
+directory "/vagrant/site2/logs" do
+  owner "root"
+  group "root"
+  mode 00644
+  action :create
+end
+
+directory "/vagrant/site2/htdocs" do
+  owner "localuser"
+  group "apache"
+  mode 00644
+  action :create
+end
+
+web_app "site2" do
+  server_name "site2.local"
+  server_aliases ["www.site2.local"]
+  doc_root "/vagrant/site2/htdocs"
+  vhost_root "/vagrant/site2"
+end
