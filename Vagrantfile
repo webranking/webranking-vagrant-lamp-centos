@@ -90,7 +90,13 @@ Vagrant.configure("2") do |config|
             "listen_address" => "0.0.0.0",
             # "server_name" => "localhost",
         },
-        "fqdn" => "app.local",
+        'php' => {
+            'version' => '5.3',
+            'directives' => {
+                'date.timezone' => 'Europe/Rome'
+            }
+        },
+        "fqdn" => "app.local"
     }
     chef.add_recipe "yum"
     chef.add_recipe "selinux::disabled"
