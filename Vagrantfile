@@ -114,8 +114,8 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "webranking::webmin"
   end
 
-  config.vm.synced_folder "./site/frontend", "/var/www/vhosts/site/frontend", :owner=> 'localuser', :group=>'apache', :extra => 'dmode=755,fmode=755'
-  config.vm.synced_folder "./site/backend", "/var/www/vhosts/site/backend", :owner=> 'localuser', :group=>'apache', :extra => 'dmode=755,fmode=755'
+  config.vm.synced_folder "./site/frontend", "/var/www/vhosts/site/frontend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
+  config.vm.synced_folder "./site/backend", "/var/www/vhosts/site/backend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
 
 
   # config.vm.provision :chef_solo do |chef|
