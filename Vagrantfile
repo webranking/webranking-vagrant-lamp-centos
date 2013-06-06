@@ -74,6 +74,8 @@ Vagrant.configure("2") do |config|
   # config.vm.provision :shell, :path => "networking.sh"
 
   config.vm.provision :chef_solo do |chef|
+
+    chef.data_bags_path = "data_bags"
     chef.json = {
         "mysql" => {
         "server_root_password" => "admin",
@@ -90,7 +92,10 @@ Vagrant.configure("2") do |config|
                 'date.timezone' => 'Europe/Rome'
             }
         },
-        "fqdn" => "vagrant.local"
+        "fqdn" => "vagrant.local",
+        "samba" => {
+            "hosts_allow" => 'ALL'
+        }
     }
     chef.add_recipe "yum"
     chef.add_recipe "selinux::disabled"
@@ -108,14 +113,17 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "apache2::mod_rewrite"
     chef.add_recipe "webranking"
     chef.add_recipe "webranking::vhosts"
+    chef.add_recipe "samba"
+    chef.add_recipe "samba::server"
     chef.add_recipe "webranking::xdebug"
     chef.add_recipe "webranking::phing"
     chef.add_recipe "webranking::phpunit"
     chef.add_recipe "webranking::webmin"
+    chef.add_recipe "webranking::samba"
   end
 
-  config.vm.synced_folder "./site/frontend", "/var/www/vhosts/site/frontend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
-  config.vm.synced_folder "./site/backend", "/var/www/vhosts/site/backend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
+  # config.vm.synced_folder "./site/frontend", "/var/www/vhosts/site/frontend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
+  # config.vm.synced_folder "./site/backend", "/var/www/vhosts/site/backend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
 
 
   # config.vm.provision :chef_solo do |chef|

@@ -1,0 +1,15 @@
+{
+  "id": "shares",
+  "shares": {
+    "site": {
+      "comment": "Site",
+      "path": "/var/www/vhosts/site/",
+      "delete readonly": "yes",
+      "writeable": "yes",
+      "create mode": "664",
+      "force create mode": "600",
+      "force user": "localuser",
+      "force group": "apache"
+    }
+  }
+}

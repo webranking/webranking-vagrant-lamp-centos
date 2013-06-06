@@ -1,0 +1,9 @@
+{
+  "id": "users",
+  "users": {
+    "localuser": {
+        "id": "localuser",
+        "smbpasswd": "vagrant"
+    }
+  }
+}
