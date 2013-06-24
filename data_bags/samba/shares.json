@@ -3,7 +3,7 @@
   "shares": {
     "site": {
       "comment": "Site",
-      "path": "/var/www/vhosts/site/",
+      "path": "/var/www/vhosts/",
       "delete readonly": "yes",
       "writeable": "yes",
       "create mode": "664",

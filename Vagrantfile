@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "centos64_64_NREL"
+  config.vm.box = "centos"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
@@ -103,7 +103,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "vim"
     # chef.add_recipe "openssl"
     chef.add_recipe "apache2"
-    # chef.add_recipe "mysql"
+    chef.add_recipe "mysql"
     # chef.add_recipe "mysql::server"
     chef.add_recipe "php"
     # chef.add_recipe "php::module_apc"
@@ -115,13 +115,18 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "webranking::vhosts"
     chef.add_recipe "samba"
     chef.add_recipe "samba::server"
-    chef.add_recipe "webranking::xdebug"
+    # chef.add_recipe "webranking::xdebug"
     chef.add_recipe "webranking::phing"
-    chef.add_recipe "webranking::phpunit"
+    # chef.add_recipe "webranking::phpunit"
     chef.add_recipe "webranking::webmin"
     chef.add_recipe "webranking::samba"
+    chef.add_recipe "webranking::svn1-7"
+    # chef.add_recipe "webranking::subversion"
   end
 
+  config.vm.synced_folder "J:/Greenbox/01-Greenbox/sviluppo/", "/svn_project"
+  config.vm.synced_folder "J:/Nutricia-Danone/00-Progetto1/sviluppo/03 SVN", "/svn_nutricia"
+  
   # config.vm.synced_folder "./site/frontend", "/var/www/vhosts/site/frontend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
   # config.vm.synced_folder "./site/backend", "/var/www/vhosts/site/backend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
 
