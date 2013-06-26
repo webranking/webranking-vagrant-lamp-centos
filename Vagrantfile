@@ -1,5 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+require 'json'
+
+# import json with project configs
+configurations = JSON.parse(File.read(Pathname(__FILE__).dirname.join('data_bags/configurations/', 'default.json')))
 
 Vagrant.configure("2") do |config|
   # All Vagrant configuration is done here. The most common configuration
@@ -78,9 +82,12 @@ Vagrant.configure("2") do |config|
     chef.data_bags_path = "data_bags"
     chef.json = {
         "mysql" => {
-        "server_root_password" => "admin",
-        "server_repl_password" => "admin",
-        "server_debian_password" => "admin"
+        # "server_root_password" => "admin",
+        # "server_repl_password" => "admin",
+        # "server_debian_password" => "admin"        
+        "server_root_password" => configurations['database']['server_root_password'],
+        "server_repl_password" => configurations['database']['server_repl_password'],
+        "server_debian_password" => configurations['database']['server_debian_password']
         },
         "apache" => {
             "listen_address" => "0.0.0.0",
@@ -96,6 +103,10 @@ Vagrant.configure("2") do |config|
         "samba" => {
             "hosts_allow" => 'ALL'
         }
+        # ,
+        # "configs" => {
+        #     "local_link_to_svn" => "/svn_nutricia"
+        # }
     }
     chef.add_recipe "yum"
     chef.add_recipe "selinux::disabled"
@@ -111,6 +122,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "php::module_mysql"
     chef.add_recipe "apache2::mod_php5"
     chef.add_recipe "apache2::mod_rewrite"
+    chef.add_recipe "php::module_mcrypt"
     chef.add_recipe "webranking"
     chef.add_recipe "webranking::vhosts"
     chef.add_recipe "samba"
@@ -121,11 +133,17 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "webranking::webmin"
     chef.add_recipe "webranking::samba"
     chef.add_recipe "webranking::svn1-7"
+    chef.add_recipe "postinstall"
     # chef.add_recipe "webranking::subversion"
+    # chef.add_recipe "webranking::configurations"
   end
 
-  config.vm.synced_folder "J:/Greenbox/01-Greenbox/sviluppo/", "/svn_project"
-  config.vm.synced_folder "J:/Nutricia-Danone/00-Progetto1/sviluppo/03 SVN", "/svn_nutricia"
+
+  if configurations['svn'].include?('local_project_repository_mount') 
+    config.vm.synced_folder "J:/Nutricia-Danone/00-Progetto1/sviluppo/03 SVN", configurations['svn']['local_project_repository_mount']
+  end
+
+  # config.vm.synced_folder "J:/Nutricia-Danone/00-Progetto1/sviluppo/03 SVN", "/svn_nutricia"
   
   # config.vm.synced_folder "./site/frontend", "/var/www/vhosts/site/frontend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
   # config.vm.synced_folder "./site/backend", "/var/www/vhosts/site/backend", :owner=> 'vagrant', :group=>'apache', :extra => 'dmode=755,fmode=755'
