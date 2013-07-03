@@ -123,6 +123,8 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "apache2::mod_php5"
     chef.add_recipe "apache2::mod_rewrite"
     chef.add_recipe "php::module_mcrypt"
+    chef.add_recipe "php::module_domxml"
+    chef.add_recipe "php::module_gd"
     chef.add_recipe "webranking"
     chef.add_recipe "webranking::vhosts"
     chef.add_recipe "samba"
@@ -140,7 +142,7 @@ Vagrant.configure("2") do |config|
 
 
   if configurations['svn'].include?('local_project_repository_mount') 
-    config.vm.synced_folder "J:/Nutricia-Danone/00-Progetto1/sviluppo/03 SVN", configurations['svn']['local_project_repository_mount']
+    config.vm.synced_folder configurations['svn']['local_project_source'], configurations['svn']['local_project_repository_mount']
   end
 
   # config.vm.synced_folder "J:/Nutricia-Danone/00-Progetto1/sviluppo/03 SVN", "/svn_nutricia"

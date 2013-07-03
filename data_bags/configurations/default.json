@@ -1,0 +1,48 @@
+{
+	  "id": "configurations"
+	, "project": {
+		  "project_name" : "nutricia"
+		, "project_debug_email" : "webranking.errori@gmail.com"
+		, "frontend_virtualhost" : "nutricia.local"
+		, "frontend_user" : "localuser"
+		, "backend_virtualhost": "cms.nutricia.local"
+		, "backend_user": "localuser"
+		, "frontend_default_dev_url": "www.nutricia.it"
+
+		// , "canali": {
+		// 	"nutricia": {
+		// 		  "cartella": ""
+		// 		, "nazioni": {
+
+		// 		}
+		// 	}
+		// }
+
+		, "canali_alias": "nutricia"
+		, "canali_cartelle": "nutricia"
+		, "webserver_root": "/var/www/vhosts/"
+		, "postfisso_spazi_di_sviluppo_backend": "cms.nutricia.local"
+		, "postfisso_spazi_di_sviluppo_frontend": "nutricia.local"
+	}
+	, "svn": {
+		  "svn_project_repository": "file:///svn_nutricia/"
+		, "local_project_repository_mount": "/svn_nutricia"
+		, "local_project_source": "J:/Nutricia-Danone/00-Progetto1/sviluppo/03 SVN"
+		, "frontend_code_svn_repository": "http://vm0374.cs05.seeweb.it/repos/greenbox.frontend/trunk/"
+		, "backend_code_svn_repository": "http://vm0374.cs05.seeweb.it/repos/greenbox.backend/trunk/core"
+	}
+	, "database": {
+		  "server_root_password": "admin"
+    	, "server_repl_password": "admin"
+   		, "server_debian_password": "admin"
+   		, "db_host": "CHICAGO"
+		, "db_user": "root"
+		, "db_password": "Cfetuso"
+		, "db_name": "nutricia"
+	}
+	, "vagrant": {
+		  "vagrant_path" : "/vagrant"
+		, "data_bags_path": "/data_bags"
+		, "cookbooks_path": "/cookbooks"
+	}
+}
