@@ -1,0 +1,8 @@
+{
+	  "id": "all"
+	, "svn_repository": "file:///svn_nutricia/"
+	, "local_project_repository_mount": "/svn_nutricia"
+	, "server_root_password": "admin"
+    , "server_repl_password": "admin"
+    , "server_debian_password": "admin"
+}
